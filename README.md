@@ -4,9 +4,9 @@
 
 This project demonstrates an end-to-end ETL (Extract, Transform, Load) data engineering pipeline built in Python.
 
-The pipeline retrieves daily weather forecast data for Bellevue, Washington from the Open-Meteo API, transforms and validates the data, and loads it into a SQLite database for analysis.
+The pipeline retrieves daily weather forecast data for multiple cities in Washington using the Open-Meteo API, transforms and validates the data, and loads it into a SQLite database for SQL analysis.
 
-The goal of this project was to gain hands-on experience with common data engineering concepts including API integration, data transformation, data quality validation, relational databases, and project organization.
+The project was designed to demonstrate common data engineering practices including API integration, modular ETL development, data quality validation, relational databases, SQL analytics, and maintainable project architecture.
 
 ---
 

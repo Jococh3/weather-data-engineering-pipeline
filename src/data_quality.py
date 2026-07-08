@@ -8,12 +8,13 @@ Tell us whether it passed.
 
 import pandas as pd
 
+from config import PROCESSED_DATA_PATH
+
 
 def load_processed_data():
     """Load the processed weather data from the CSV file."""
 
-    file_path = "data/processed/bellevue_weather_daily.csv"
-    return pd.read_csv(file_path)
+    return pd.read_csv(PROCESSED_DATA_PATH)
 
 
 def validate_data(data_df):
@@ -33,10 +34,12 @@ def validate_data(data_df):
     return True
 
 
+def run():
+    """Run the data quality checks."""
+    weather_df = load_processed_data()
+    validate_data(weather_df)
+    print("Data validation passed.")
+
+
 if __name__ == "__main__":
-    data_df = load_processed_data()
-    try:
-        is_valid = validate_data(data_df)
-        print(f"Data validation result: {'PASSED' if is_valid else 'FAILED'}")
-    except ValueError as e:
-        print(f"Data validation failed: {e}")
+    run()

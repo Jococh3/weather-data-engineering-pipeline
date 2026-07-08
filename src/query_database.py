@@ -1,17 +1,19 @@
-"""
-This is a test file to query the SQLite database and load the data into a pandas DataFrame.
-"""
-
 import sqlite3
+
 import pandas as pd
 
-DATABASE_PATH = "data/weather.db"
+from config import DATABASE_PATH
 
 connection = sqlite3.connect(DATABASE_PATH)
 
 query = """
-SELECT *
-FROM weather_daily;
+SELECT
+    city,
+    ROUND(AVG(max_temp_f), 1) AS avg_max_temp_f,
+    ROUND(AVG(min_temp_f), 1) AS avg_min_temp_f
+FROM weather_daily
+GROUP BY city
+ORDER BY avg_max_temp_f DESC;
 """
 
 weather_df = pd.read_sql_query(query, connection)

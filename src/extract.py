@@ -3,38 +3,54 @@ from pathlib import Path
 
 import requests
 
+from config import API_URL, CITIES, RAW_DATA_PATH, TIMEZONE
 
-def fetch_weather_data():
-    """Fetch daily weather data for Bellevue from the Open-Meteo API."""
 
-    url = "https://api.open-meteo.com/v1/forecast"
+def fetch_weather_data(city):
+    """Fetch daily weather data for one city from the Open-Meteo API."""
 
     params = {
-        "latitude": 47.6101,
-        "longitude": -122.2015,
+        "latitude": city["latitude"],
+        "longitude": city["longitude"],
         "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum",
-        "timezone": "America/Los_Angeles",
+        "timezone": TIMEZONE,
     }
 
-    response = requests.get(url, params=params)
-    response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
+    response = requests.get(API_URL, params=params)
+    response.raise_for_status()
 
-    return response.json()  # Return the JSON data as a Python dictionary
+    weather_data = response.json()
+
+    # Add city name so we can identify the source later.
+    weather_data["city"] = city["city"]
+
+    return weather_data
 
 
-def save_raw_data(data):
-    """Save the raw API response as a JSON file."""
+def save_raw_data(weather_data):
+    """Save all raw city weather responses as one JSON file."""
 
-    raw_path = Path("data/raw/bellevue_weather_raw.json")
-    raw_path.parent.mkdir(
-        parents=True, exist_ok=True
-    )  # Create the directory if it doesn't exist
+    raw_path = Path(RAW_DATA_PATH)
+    raw_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(raw_path, "w") as file:
-        json.dump(data, file, indent=4)
+        json.dump(weather_data, file, indent=4)
+
+
+def run():
+    """Run the extract step for all configured cities."""
+
+    all_weather_data = []
+
+    # Loop through each city in config.py and fetch its weather data.
+    for city in CITIES:
+        city_weather_data = fetch_weather_data(city)
+        all_weather_data.append(city_weather_data)
+
+    save_raw_data(all_weather_data)
+
+    print("Raw weather data fetched and saved successfully.")
 
 
 if __name__ == "__main__":
-    data = fetch_weather_data()
-    save_raw_data(data)
-    print("Raw weather data fetched and saved successfully.")
+    run()

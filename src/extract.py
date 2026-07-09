@@ -3,7 +3,11 @@ from pathlib import Path
 
 import requests
 
-from config import API_URL, CITIES, RAW_DATA_PATH, TIMEZONE
+from src.config import API_URL, CITIES, RAW_DATA_PATH, TIMEZONE
+
+from src.logger import setup_logger
+
+logger = setup_logger()
 
 
 def fetch_weather_data(city):
@@ -44,12 +48,17 @@ def run():
 
     # Loop through each city in config.py and fetch its weather data.
     for city in CITIES:
+        logger.info(f"Fetching weather data for {city['city']}")
+
         city_weather_data = fetch_weather_data(city)
+
+        logger.info(f"Successfully retrieved weather data for {city['city']}")
+
         all_weather_data.append(city_weather_data)
 
     save_raw_data(all_weather_data)
 
-    print("Raw weather data fetched and saved successfully.")
+    logger.info("Raw weather data fetched and saved successfully.")
 
 
 if __name__ == "__main__":

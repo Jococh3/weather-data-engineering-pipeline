@@ -1,0 +1,6 @@
+2026-07-09 15:38:24,766 - INFO - Fetching weather data for Bellevue
+2026-07-09 15:38:25,407 - INFO - Fetching weather data for Seattle
+2026-07-09 15:38:26,027 - INFO - Fetching weather data for Redmond
+2026-07-09 15:38:26,651 - INFO - Fetching weather data for Kirkland
+2026-07-09 15:38:27,261 - INFO - Fetching weather data for Tacoma
+2026-07-09 15:38:27,894 - INFO - Raw weather data fetched and saved successfully.

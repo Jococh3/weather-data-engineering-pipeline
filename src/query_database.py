@@ -2,7 +2,7 @@ import sqlite3
 
 import pandas as pd
 
-from config import DATABASE_PATH
+from src.config import DATABASE_PATH
 
 connection = sqlite3.connect(DATABASE_PATH)
 

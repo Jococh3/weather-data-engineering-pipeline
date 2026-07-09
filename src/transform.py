@@ -2,7 +2,11 @@ import json
 
 import pandas as pd
 
-from config import PROCESSED_DATA_PATH, RAW_DATA_PATH
+from src.config import PROCESSED_DATA_PATH, RAW_DATA_PATH
+
+from src.logger import setup_logger
+
+logger = setup_logger()
 
 
 def load_raw_data():
@@ -69,11 +73,16 @@ def save_processed_data(weather_df):
 def run():
     """Run the transform step."""
 
-    raw_data = load_raw_data()
-    weather_df = transform_weather_data(raw_data)
-    save_processed_data(weather_df)
+    logger.info("Starting transform step.")
 
-    print(f"Processed weather data saved to {PROCESSED_DATA_PATH}")
+    raw_data = load_raw_data()
+    logger.info(f"Loaded raw weather data for {len(raw_data)} cities.")
+
+    weather_df = transform_weather_data(raw_data)
+    logger.info(f"Transformed weather data into {len(weather_df)} rows.")
+
+    save_processed_data(weather_df)
+    logger.info(f"Processed weather data saved to {PROCESSED_DATA_PATH}")
 
 
 if __name__ == "__main__":

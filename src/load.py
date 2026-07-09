@@ -2,7 +2,11 @@ import sqlite3
 
 import pandas as pd
 
-from config import DATABASE_PATH, PROCESSED_DATA_PATH
+from src.config import DATABASE_PATH, PROCESSED_DATA_PATH
+
+from src.logger import setup_logger
+
+logger = setup_logger()
 
 
 def load_processed_data():
@@ -34,7 +38,7 @@ def run():
     load_data_to_database(weather_df, connection)
     connection.close()
 
-    print(f"Weather data loaded into {DATABASE_PATH}")
+    logger.info(f"Loaded {len(weather_df)} weather records into {DATABASE_PATH}")
 
 
 if __name__ == "__main__":

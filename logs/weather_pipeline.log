@@ -1,0 +1,89 @@
+2026-07-09 15:39:50,143 - INFO - Fetching weather data for Bellevue
+2026-07-09 15:39:50,768 - INFO - Fetching weather data for Seattle
+2026-07-09 15:39:51,389 - INFO - Fetching weather data for Redmond
+2026-07-09 15:39:52,003 - INFO - Fetching weather data for Kirkland
+2026-07-09 15:39:52,624 - INFO - Fetching weather data for Tacoma
+2026-07-09 15:39:53,246 - INFO - Raw weather data fetched and saved successfully.
+2026-07-09 15:45:33,024 - INFO - Starting transform step.
+2026-07-09 15:45:33,036 - INFO - Loaded raw weather data for 5 cities.
+2026-07-09 15:45:33,049 - INFO - Transformed weather data into 35 rows.
+2026-07-09 15:45:33,051 - INFO - Processed weather data saved to data/processed/weather_data.csv
+2026-07-09 15:46:10,021 - INFO - Fetching weather data for Bellevue
+2026-07-09 15:46:10,633 - INFO - Fetching weather data for Seattle
+2026-07-09 15:46:11,228 - INFO - Fetching weather data for Redmond
+2026-07-09 15:46:11,833 - INFO - Fetching weather data for Kirkland
+2026-07-09 15:46:12,454 - INFO - Fetching weather data for Tacoma
+2026-07-09 15:46:13,062 - INFO - Raw weather data fetched and saved successfully.
+2026-07-09 15:46:13,384 - INFO - Starting transform step.
+2026-07-09 15:46:13,385 - INFO - Loaded raw weather data for 5 cities.
+2026-07-09 15:46:13,395 - INFO - Transformed weather data into 35 rows.
+2026-07-09 15:46:13,397 - INFO - Processed weather data saved to data/processed/weather_data.csv
+2026-07-09 15:48:28,497 - INFO - Starting weather ETL pipeline.
+2026-07-09 15:48:28,497 - INFO - Fetching weather data for Bellevue
+2026-07-09 15:48:29,105 - INFO - Fetching weather data for Seattle
+2026-07-09 15:48:29,711 - INFO - Fetching weather data for Redmond
+2026-07-09 15:48:30,306 - INFO - Fetching weather data for Kirkland
+2026-07-09 15:48:30,904 - INFO - Fetching weather data for Tacoma
+2026-07-09 15:48:31,514 - INFO - Raw weather data fetched and saved successfully.
+2026-07-09 15:48:31,514 - INFO - Starting transform step.
+2026-07-09 15:48:31,514 - INFO - Loaded raw weather data for 5 cities.
+2026-07-09 15:48:31,525 - INFO - Transformed weather data into 35 rows.
+2026-07-09 15:48:31,526 - INFO - Processed weather data saved to data/processed/weather_data.csv
+2026-07-09 15:48:31,546 - INFO - Weather ETL pipeline completed successfully.
+2026-07-09 15:50:02,424 - INFO - Starting weather ETL pipeline.
+2026-07-09 15:50:02,425 - INFO - Fetching weather data for Bellevue
+2026-07-09 15:50:03,234 - INFO - Fetching weather data for Seattle
+2026-07-09 15:50:08,495 - INFO - Starting weather ETL pipeline.
+2026-07-09 15:50:08,496 - INFO - Fetching weather data for Bellevue
+2026-07-09 15:50:09,100 - INFO - Fetching weather data for Seattle
+2026-07-09 15:50:09,713 - INFO - Fetching weather data for Redmond
+2026-07-09 15:50:10,318 - INFO - Fetching weather data for Kirkland
+2026-07-09 15:50:10,930 - INFO - Fetching weather data for Tacoma
+2026-07-09 15:50:11,537 - INFO - Raw weather data fetched and saved successfully.
+2026-07-09 15:50:11,537 - INFO - Starting transform step.
+2026-07-09 15:50:11,537 - INFO - Loaded raw weather data for 5 cities.
+2026-07-09 15:50:11,548 - INFO - Transformed weather data into 35 rows.
+2026-07-09 15:50:11,550 - INFO - Processed weather data saved to data/processed/weather_data.csv
+2026-07-09 15:50:11,552 - INFO - Data validation passed.
+2026-07-09 15:50:11,571 - INFO - Weather data loaded into data/database/weather_data.db
+2026-07-09 15:50:11,572 - INFO - Weather ETL pipeline completed successfully.
+2026-07-09 15:53:51,348 - INFO - Starting weather ETL pipeline.
+2026-07-09 15:53:51,348 - INFO - Fetching weather data for Bellevue
+2026-07-09 15:53:51,974 - INFO - Successfully retrieved weather data for Bellevue
+2026-07-09 15:53:51,974 - INFO - Fetching weather data for Seattle
+2026-07-09 15:53:52,598 - INFO - Successfully retrieved weather data for Seattle
+2026-07-09 15:53:52,598 - INFO - Fetching weather data for Redmond
+2026-07-09 15:53:53,210 - INFO - Successfully retrieved weather data for Redmond
+2026-07-09 15:53:53,211 - INFO - Fetching weather data for Kirkland
+2026-07-09 15:53:53,837 - INFO - Successfully retrieved weather data for Kirkland
+2026-07-09 15:53:53,837 - INFO - Fetching weather data for Tacoma
+2026-07-09 15:53:54,452 - INFO - Successfully retrieved weather data for Tacoma
+2026-07-09 15:53:54,453 - INFO - Raw weather data fetched and saved successfully.
+2026-07-09 15:53:54,453 - INFO - Starting transform step.
+2026-07-09 15:53:54,453 - INFO - Loaded raw weather data for 5 cities.
+2026-07-09 15:53:54,465 - INFO - Transformed weather data into 35 rows.
+2026-07-09 15:53:54,467 - INFO - Processed weather data saved to data/processed/weather_data.csv
+2026-07-09 15:53:54,467 - INFO - Starting data validation.
+2026-07-09 15:53:54,468 - INFO - Data validation passed.
+2026-07-09 15:53:54,489 - INFO - Loaded 35 weather records into data/database/weather_data.db
+2026-07-09 15:53:54,489 - INFO - Weather ETL pipeline completed successfully.
+2026-07-09 15:55:04,290 - INFO - Starting weather ETL pipeline.
+2026-07-09 15:55:04,290 - INFO - Fetching weather data for Bellevue
+2026-07-09 15:55:04,891 - INFO - Successfully retrieved weather data for Bellevue
+2026-07-09 15:55:04,891 - INFO - Fetching weather data for Seattle
+2026-07-09 15:55:05,496 - INFO - Successfully retrieved weather data for Seattle
+2026-07-09 15:55:05,496 - INFO - Fetching weather data for Redmond
+2026-07-09 15:55:06,092 - INFO - Successfully retrieved weather data for Redmond
+2026-07-09 15:55:06,092 - INFO - Fetching weather data for Kirkland
+2026-07-09 15:55:06,686 - INFO - Successfully retrieved weather data for Kirkland
+2026-07-09 15:55:06,687 - INFO - Fetching weather data for Tacoma
+2026-07-09 15:55:07,285 - INFO - Successfully retrieved weather data for Tacoma
+2026-07-09 15:55:07,286 - INFO - Raw weather data fetched and saved successfully.
+2026-07-09 15:55:07,286 - INFO - Starting transform step.
+2026-07-09 15:55:07,286 - INFO - Loaded raw weather data for 5 cities.
+2026-07-09 15:55:07,297 - INFO - Transformed weather data into 35 rows.
+2026-07-09 15:55:07,300 - INFO - Processed weather data saved to data/processed/weather_data.csv
+2026-07-09 15:55:07,300 - INFO - Starting data validation.
+2026-07-09 15:55:07,302 - INFO - Data validation passed.
+2026-07-09 15:55:07,321 - INFO - Loaded 35 weather records into data/database/weather_data.db
+2026-07-09 15:55:07,321 - INFO - Weather ETL pipeline completed successfully in 3.03 seconds.

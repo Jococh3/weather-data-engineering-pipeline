@@ -8,7 +8,11 @@ Tell us whether it passed.
 
 import pandas as pd
 
-from config import PROCESSED_DATA_PATH
+from src.config import PROCESSED_DATA_PATH
+
+from src.logger import setup_logger
+
+logger = setup_logger()
 
 
 def load_processed_data():
@@ -36,9 +40,10 @@ def validate_data(data_df):
 
 def run():
     """Run the data quality checks."""
+    logger.info("Starting data validation.")
     weather_df = load_processed_data()
     validate_data(weather_df)
-    print("Data validation passed.")
+    logger.info("Data validation passed.")
 
 
 if __name__ == "__main__":

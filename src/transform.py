@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import pandas as pd
 
@@ -21,14 +22,11 @@ def load_raw_data():
 def transform_city_weather(city_data):
     """Transform one city's raw weather data into a cleaned DataFrame."""
 
-    # Build a DataFrame from the daily weather section.
     daily_data = city_data["daily"]
     weather_df = pd.DataFrame(daily_data)
 
-    # Convert date strings into datetime values.
     weather_df["time"] = pd.to_datetime(weather_df["time"])
 
-    # Rename columns to clearer database-friendly names.
     weather_df = weather_df.rename(
         columns={
             "time": "weather_date",
@@ -38,11 +36,8 @@ def transform_city_weather(city_data):
         }
     )
 
-    # Add Fahrenheit columns for easier interpretation.
     weather_df["max_temp_f"] = weather_df["max_temp_c"] * 9 / 5 + 32
     weather_df["min_temp_f"] = weather_df["min_temp_c"] * 9 / 5 + 32
-
-    # Add the city name so rows can be grouped by location.
     weather_df["city"] = city_data["city"]
 
     return weather_df
@@ -53,12 +48,10 @@ def transform_weather_data(raw_data):
 
     city_dataframes = []
 
-    # Transform each city's weather data separately.
     for city_data in raw_data:
         city_weather_df = transform_city_weather(city_data)
         city_dataframes.append(city_weather_df)
 
-    # Combine all city DataFrames into one table.
     weather_df = pd.concat(city_dataframes, ignore_index=True)
 
     return weather_df
@@ -67,7 +60,9 @@ def transform_weather_data(raw_data):
 def save_processed_data(weather_df):
     """Save the transformed weather data to a CSV file."""
 
-    weather_df.to_csv(PROCESSED_DATA_PATH, index=False)
+    processed_path = Path(PROCESSED_DATA_PATH)
+    processed_path.parent.mkdir(parents=True, exist_ok=True)
+    weather_df.to_csv(processed_path, index=False)
 
 
 def run():

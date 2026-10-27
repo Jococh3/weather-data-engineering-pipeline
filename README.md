@@ -1,324 +1,86 @@
 # Weather Data Engineering Pipeline
 
-## Overview
+A Python ETL project that retrieves daily forecast data for five Washington cities from the Open-Meteo API, transforms it, checks data quality, and stores the results in SQLite for SQL analysis.
 
-This project demonstrates an end-to-end ETL (Extract, Transform, Load) data engineering pipeline built in Python.
+## What it does
 
-The pipeline retrieves daily weather forecast data for multiple Washington cities using the Open-Meteo API, transforms and validates the data, and loads it into a SQLite database for SQL analysis.
+1. **Extract** — Requests daily maximum and minimum temperature and precipitation for Bellevue, Seattle, Redmond, Kirkland, and Tacoma. Raw responses are saved as JSON.
+2. **Transform** — Combines the city responses into one table, parses dates, retains temperatures in Celsius, calculates Fahrenheit values, and writes a processed CSV.
+3. **Validate** — Checks that the processed table is nonempty, contains required columns, has no missing values, and has maximum temperatures greater than or equal to minimum temperatures.
+4. **Load** — Replaces the `weather_daily` table in SQLite with the current forecast rows.
 
-The project emphasizes modular software design, maintainability, and production-inspired engineering practices while demonstrating core data engineering concepts.
-
----
-
-## Features
-
-- 🌤️ Collects weather forecasts from the Open-Meteo API
-- 🌎 Supports multiple Washington cities
-- ⚙️ Centralized project configuration
-- 🔄 Modular ETL architecture
-- ✅ Data quality validation
-- 🗄️ Loads cleaned data into SQLite
-- 📊 SQL analytics queries
-- 📝 Structured logging to both the console and log files
-
----
-
-## Technologies Used
-
-- Python 3
-- Pandas
-- Requests
-- SQLite
-- SQL
-- Logging
-- Jupyter Notebook
-- Git & GitHub
-
----
-
-## Project Structure
-
-```text
-weather-data-pipeline/
-│
-├── data/
-│   ├── raw/
-│   │   └── weather_data.json
-│   │
-│   ├── processed/
-│   │   └── weather_data.csv
-│   │
-│   └── database/
-│       └── weather_data.db
-│
-├── logs/
-│   └── weather_pipeline.log
-│
-├── notebooks/
-│   └── exploration.ipynb
-│
-├── sql/
-│   ├── analysis_queries.sql
-│   ├── create_tables.sql
-│   └── load_data.sql
-│
-├── src/
-│   ├── __init__.py
-│   ├── config.py
-│   ├── logger.py
-│   ├── extract.py
-│   ├── transform.py
-│   ├── data_quality.py
-│   ├── load.py
-│   └── query_database.py
-│
-├── main.py
-├── README.md
-├── requirements.txt
-└── .gitignore
+```mermaid
+flowchart LR
+    A["Open-Meteo API"] --> B["Extract JSON"]
+    B --> C["Transform to CSV"]
+    C --> D["Quality checks"]
+    D --> E["SQLite: weather_daily"]
+    E --> F["SQL analysis"]
 ```
 
----
+## Technology
 
-## ETL Pipeline
+Python, pandas, requests, SQLite, SQL, and Python logging.
 
-```text
-Open-Meteo API
-       │
-       ▼
-   extract.py
-       │
-       ▼
- weather_data.json
-       │
-       ▼
- transform.py
-       │
-       ▼
- weather_data.csv
-       │
-       ▼
-data_quality.py
-       │
-       ▼
-    load.py
-       │
-       ▼
- weather_data.db
-       │
-       ▼
- SQL Analytics
-```
+## Repository layout
 
----
+- `main.py` runs the four pipeline stages in order.
+- `src/config.py` contains city coordinates, API settings, and output paths.
+- `src/extract.py`, `src/transform.py`, `src/data_quality.py`, and `src/load.py` implement the pipeline.
+- `src/query_database.py` provides a database query helper.
+- `sql/analysis_queries.sql` contains sample analysis queries.
+- `notebooks/exploration.ipynb` contains exploratory analysis.
+- `data/database/weather_data.db` is a checked-in SQLite snapshot. A pipeline run refreshes its `weather_daily` table.
+- `data/raw/`, `data/processed/`, and `logs/` are generated at runtime.
 
-## Extract
+The `sql/create_tables.sql` and `sql/load_data.sql` files are currently empty and are not used by the pipeline; pandas creates or replaces the table during the load stage.
 
-The extraction stage:
+## Run locally
 
-- Reads project settings from `config.py`
-- Connects to the Open-Meteo API
-- Retrieves daily forecasts for multiple Washington cities
-- Saves the raw API responses as JSON
-
-Current cities include:
-
-- Bellevue
-- Seattle
-- Redmond
-- Kirkland
-- Tacoma
-
----
-
-## Transform
-
-The transformation stage:
-
-- Loads the raw JSON responses
-- Converts nested weather data into Pandas DataFrames
-- Combines multiple cities into a single dataset
-- Converts dates into datetime objects
-- Renames columns for readability
-- Calculates temperatures in Fahrenheit
-- Exports the cleaned data as CSV
-
----
-
-## Data Quality
-
-Before loading the data into the database, the pipeline validates:
-
-- Dataset is not empty
-- Required columns exist
-- No missing values
-- Maximum temperature is greater than or equal to minimum temperature
-
-The pipeline immediately stops if validation fails.
-
----
-
-## Load
-
-The validated dataset is loaded into a SQLite database.
-
-Database:
-
-```text
-data/database/weather_data.db
-```
-
-Table:
-
-```text
-weather_daily
-```
-
----
-
-## Logging
-
-The pipeline uses Python's built-in `logging` module instead of `print()` statements.
-
-Each run records:
-
-- Pipeline start and completion
-- Weather retrieval for each city
-- Transformation progress
-- Validation status
-- Database loading
-- Record counts
-
-Logs are written to:
-
-```text
-logs/weather_pipeline.log
-```
-
-Example output:
-
-```text
-INFO Starting weather ETL pipeline.
-INFO Fetching weather data for Bellevue
-INFO Successfully retrieved weather data for Bellevue
-INFO Loaded raw weather data for 5 cities.
-INFO Transformed weather data into 35 rows.
-INFO Starting data validation.
-INFO Data validation passed.
-INFO Loaded 35 weather records into data/database/weather_data.db
-INFO Weather ETL pipeline completed successfully.
-```
-
----
-
-## Configuration
-
-Project settings are centralized in `src/config.py`.
-
-This includes:
-
-- Supported cities
-- API endpoint
-- Time zone
-- File paths
-- Database location
-
-This allows the pipeline to be extended without modifying multiple files.
-
----
-
-## Running the Pipeline
-
-Clone the repository:
+Requirements: Python and an internet connection. Open-Meteo access does not require an API key.
 
 ```bash
-git clone https://github.com/<your-username>/weather-data-pipeline.git
+git clone https://github.com/Jococh3/weather-data-engineering-pipeline.git
+cd weather-data-engineering-pipeline
+python -m venv .venv
 ```
 
-Install dependencies:
+Activate the environment, then install dependencies and run the pipeline:
 
 ```bash
+# macOS / Linux
+source .venv/bin/activate
 pip install -r requirements.txt
-```
-
-Run the pipeline:
-
-```bash
 python main.py
 ```
 
----
+On Windows PowerShell, activate with `.venv\\Scripts\\Activate.ps1`, then run the same install and pipeline commands.
 
-## Example SQL Queries
+The pipeline writes raw responses to `data/raw/weather_data.json`, transformed rows to `data/processed/weather_data.csv`, and the SQLite database to `data/database/weather_data.db`. It writes run details to `logs/weather_pipeline.log`.
 
-Average forecasted temperature by city:
+## Example SQL
+
+Average forecasted maximum temperature by city:
 
 ```sql
-SELECT
-    city,
-    ROUND(AVG(max_temp_f), 1) AS avg_max_temp_f,
-    ROUND(AVG(min_temp_f), 1) AS avg_min_temp_f
+SELECT city, ROUND(AVG(max_temp_f), 1) AS avg_max_temp_f
 FROM weather_daily
 GROUP BY city
 ORDER BY avg_max_temp_f DESC;
 ```
 
-Warmest forecasted day:
+Warmest forecasted city and day:
 
 ```sql
-SELECT
-    city,
-    weather_date,
-    max_temp_f
+SELECT city, weather_date, max_temp_f
 FROM weather_daily
 ORDER BY max_temp_f DESC
 LIMIT 1;
 ```
 
----
+## Scope and limitations
 
-## Skills Demonstrated
-
-- ETL pipeline development
-- REST API integration
-- JSON processing
-- Data transformation with Pandas
-- Multi-city data ingestion
-- Data quality validation
-- SQLite database management
-- SQL analytics
-- Structured logging
-- Modular Python application design
-- Configuration management
-- Git version control
-- Software architecture
-
----
-
-## Future Improvements
-
-Planned enhancements include:
-
-- Historical weather data collection
-- Incremental database loading
-- Duplicate prevention
-- Unit testing with pytest
-- Docker containerization
-- PostgreSQL integration
-- Workflow orchestration with Airflow or Prefect
-- Interactive dashboard with Streamlit
-
----
-
-## About This Project
-
-This project was built as a hands-on learning exercise to develop practical data engineering skills. Rather than focusing solely on data analysis, the emphasis is on designing a modular, maintainable ETL pipeline that mirrors the structure and practices commonly found in production data engineering workflows.
-
----
-
-## Author
-
-**Joshua Cochran**
-
-M.S. Data Science  
-Indiana University
+- The source is forecast data, not a historical observation archive.
+- Each run replaces the existing `weather_daily` table; it does not preserve past forecast snapshots.
+- The repository does not currently include an automated test suite.
+- Forecast values and row counts depend on the API response at run time.
